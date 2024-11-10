@@ -1,0 +1,1 @@
+server3: ssh -i /home/luffy/.ssh/server3.pem -p 2022 ubuntu@13.229.74.209

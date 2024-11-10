@@ -1,0 +1,41 @@
+Date|Author Name|Author Email|Commit Message|Commit Hash
+Fri Jul 5 21:22:28 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Add URL parameters example|25a34e660fed1037b954ee976f1a52e8e96172a2
+Fri Jul 5 21:12:25 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Create order using the backend|d62da0c16dff2cfe04d345cbcf1e8c8e7b72659c
+Fri Jul 5 20:46:40 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Learn error handling|64866ce405cc9751421bc0819127bc2fcbcb318a
+Fri Jul 5 17:30:48 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Convert from promises to async await|885b4c586bc9848f8f173a0adedc63fc1b1894e1
+Fri Jul 5 17:13:27 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Convert loadProducts from XHR to fetch|17cd919f4672f3ddf0e40706c58cf061b2fc1369
+Fri Jul 5 16:54:06 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Learn promises and convert code to promises|5a8626ac87004eca6778e12d4aca8dcfd9c076b9
+Fri Jul 5 16:17:47 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Load products in before all hook|cb2291c0f3535ad3fba60e99e9f43de34570ff1e
+Fri Jul 5 16:00:46 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Load products from the backend|748323dcd1f311ab2e89606ee4f65456ad8fe4e7
+Fri Jul 5 14:48:38 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Add backend practice file|3c3dd9db11ddd5056a4bd9f2eaade7cb143b6ace
+Fri Jul 5 13:09:24 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Learn more details about classes and this|f8f8f95909279af30878febd17099f47f5d51185
+Fri Jul 5 12:21:15 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Use inheritance and polymorphism to add size chart|1c0ace64e998b0be1cc88509c41fd4a22810f5b9
+Fri Jul 5 11:36:01 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Convert products into classes|91afec8acb9634e8d15c04b69149bdd6f9e1e685
+Fri Jul 5 11:12:41 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Make localStorageKey and loadFromStorage private|1d948e9bb9646cf207538e5bca329d1e0de3c4d6
+Fri Jul 5 10:47:47 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Create class version of commit|7330a166fa10e4769887540d2d7eab5fe6af014a
+Fri Jul 5 10:00:53 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Create version of Cart|c6878e7ad6108c4c4644bc9d88557f67988f9482
+Thu Jul 4 21:48:50 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Rename test-jasmine folder to tests|fabe6725a0f74ca5933eda81738999c635e94efc
+Thu Jul 4 21:12:33 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Create automated tests for orderSummary|2791851410a46e806a8bd8aef45c0439c0513caf
+Thu Jul 4 16:33:19 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Created automated tests for addToCart|99613f17f7c7ba9687c48c88dc3a8f57286e639c
+Thu Jul 4 15:01:04 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Remove default tests and add money tests|5a2a2b2de747097fc4a0b15230e8889f820a5d91
+Thu Jul 4 14:21:43 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Add jasmine testing framework|f13a50a65afbb11c0184b79aeae5765092d0a8bd
+Thu Jul 4 14:02:38 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Create automated tests for  formatCurrency|9bd36e42c6370c53f158ba2063164d2cc7447383
+Thu Jul 4 12:49:34 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Make payment summary interactive|1bbfbc318e2ae9853d747a47a047cbcbeed10ec4
+Thu Jul 4 12:44:45 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Save data and generate HTML for payment summary|4b48b13bb52748dba81c8c52c29343820ff6b938
+Thu Jul 4 11:58:18 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Move orderSummary into its own file|ae8837ab9c1ed3b63435f25b5f0709a21d72765c
+Thu Jul 4 11:30:09 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Regenerate HTMl when updating delivery option|1c0660886042982379085787767c83ee8324f224
+Thu Jul 4 11:16:39 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Make delivery options interactive|d59865aa1eb5dd0110992b2d2a4fe6dd5332a5df
+Thu Jul 4 11:05:36 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Save data and generate HTML for delivery options|446ef34e721914eaeca0525cd852e47b358fe74d
+Wed Jul 3 15:48:30 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Save cart in localStorage|7877753ac357ebdcc00263247cd91b91b13c41b2
+Wed Jul 3 15:41:08 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Delete products from HTML when clicking delete|ac08ccbc3668e23bdf807566b20211a084dc926e
+Wed Jul 3 15:34:21 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Delete products from cart when clicking delete|8789bbfaf945b62e60daabbb6e5cf66b6d8f917b
+Wed Jul 3 15:02:57 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Fix price formatting and radio selectors|267678a8cc8cafb61c400ee842fbab41bd241875
+Wed Jul 3 14:24:30 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Generate HTML for the order summary|fbad7c558608c1131704cd0c84d475d257aa6d20
+Wed Jul 3 13:39:13 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Move addToCart into cart.js|96c567b055f896851073e93600de8e86a88efd5b
+Wed Jul 3 12:48:45 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|import products from product.js|9a242abe466f4912e2f2da4aece9b32847c39e38
+Wed Jul 3 12:40:56 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Use nodules and import cart from cart.js|b37a1093152e47f9898e0a6c44de0500cd3ba53a
+Wed Jul 3 12:00:18 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Make the cart quantity interactive|f5ffd1b941a0f4dc359418bf034975f8ed41443c
+Wed Jul 3 11:53:53 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Make add to cart button interactive|d82ab118b6680abb007c07bb9c987773fafedf3e
+Wed Jul 3 10:34:07 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|use product.js file|485d37732f663c9e787938b5d4ca89ec155ea42e
+Wed Jul 3 10:26:13 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Generate HTML With Javascript|22d0624b7becaab19cd01a4cf02dd39b66960581
+Wed Jul 3 08:45:12 2024 +0530|Dipanshu Rawat|princerawat2108@gmail.com|Add the starting files|ebc286d5a407608b40138e750da0e0bf18fe1382

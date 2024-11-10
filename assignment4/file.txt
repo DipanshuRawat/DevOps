@@ -1,0 +1,3 @@
+server1: ssh kirti@192.168.21.30
+server2: ssh -p 2022 kirti@192.168.42.34
+server3: ssh -i /home/luffy/.ssh/server3.pem -p 2022 ubuntu@13.229.74.209

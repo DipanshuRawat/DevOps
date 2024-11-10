@@ -1,0 +1,87 @@
+sudo adduser neha
+sudo adduser vipul
+sudo adduser abhishek
+sudo addgroup linux
+sudo addgroup sigma
+------------------------------------
+sudo usermod -g sigma neha
+sudo usermod -g sigma abhishek
+sudo usermod -G linux neha
+sudo usermod -G linux abhishek
+sudo addgroup alpha
+sudo useradd -m -G linux,alpha nikhil && sudo useradd -m -G linux,alpha priyanshi
+--------------------------------------------------------------------
+sudo chmod 751 /home/neha
+sudo chmod 751 /home/vipul
+sudo chmod 751 /home/abhishek
+sudo chmod 751 /home/nikhil
+sudo chmod 751 /home/priyanshi
+--------------------------------------------------------------------
+sudo mkdir -p /home/neha/team /home/neha/linux
+sudo mkdir -p /home/vipul/team /home/vipul/linux
+sudo mkdir -p /home/abhishek/team /home/abhishek/linux
+sudo mkdir -p /home/nikhil/team /home/nikhil/linux
+sudo mkdir -p /home/priyanshi/team /home/priyanshi/linux
+-----------------------------------------------------------------------
+sudo chown :sigma /home/neha/team
+sudo chown :sigma /home/abhishek/team
+sudo chmod 070 /home/neha/team
+sudo chmod 070 /home/abhishek/team 
+############################################
+sudo chown :alpha /home/nikhil/team
+sudo chown :alpha /home/priyanshi/team
+sudo chmod 070 /home/nikhil/team
+sudo chmod 070 /home/priyanshi/team
+------------------------------------------------------------------
+sudo chown :linux /home/neha/linux
+sudo chown :linux /home/abhishek/linux
+sudo chown :linux /home/nikhil/linux
+sudo chown :linux /home/priyanshi/linux
+sudo chmod 070 /home/neha/linux
+sudo chmod 070 /home/abhishek/linux
+sudo chmod 070 /home/nikhil/linux
+sudo chmod 070 /home/priyanshi/linux
+---------------------------------------------------------------
+sudo su (nikhil/priyanshi) 
+ls -a /home/(abhishek/neha)/(team/linux)
+---------------------------------------------------------------
+sudo su vipul
+cat /home/neha/linux/file2 
+--------------------------------------------------------------
+sudo uermod -s /sbin/nologin vipul
+--------------------------------------------------------------
+sudo passwd -e abhishek
+--------------------------------------------------------------
+sudo passwd nikhil
+--------------------------------------------------------------
+cat /etc/passwd
+cat /etc/group
+--------------------------------------------------------------
+cat /etc/passw | grep neha
+--------------------------------------------------------------
+stat filename/dir_name
+chmod +permission file/dir_name
+----------------------------------------------------------------
+sudo deluser vipul
+---------------------------------------------------------------
+sudo delgroup linux  
+Collapse
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
