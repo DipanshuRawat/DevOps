@@ -1,0 +1,8 @@
+---
+- name: create user
+  user:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default( 'present' ) }}"
+    groups: "{{ item.groups | default( 'ubuntu' ) }}"
+    shell: "{{ item.shell | default( '/bin/sh' ) }}"
+  with_items: "{{ user_list }}"

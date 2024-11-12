@@ -1,0 +1,139 @@
+---
+- name: part A of ansible assignment 2
+  hosts: web
+  become: true
+  serial: 1
+
+  tasks:
+    - name: install nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+        
+    - name: add line
+      lineinfile:
+        path: /etc/logrotate.d/nginx
+        line: "        size 1G" 
+        insertbefore: rotate 14
+        state: present
+
+- name: part B of ansible assignment 2
+  hosts: web1
+  become: true
+  serial: 1
+  tasks:
+    - name: copy the first file 
+      copy:
+        src: /home/ubuntu/assignmnet2/code/first.html
+        dest: /home/ubuntu/first.html
+
+
+    - name: copy the second file 
+      copy:
+        src: /home/ubuntu/assignmnet2/code/second.html
+        dest: /home/ubuntu/second.html
+
+    - name: user cron job
+      cron:
+        name: switch the content every min
+        minute: "*/1"
+        hour: "*"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        user: root
+        job: "cp /home/ubuntu/first.html /var/www/html/index.html"
+
+    - name: user cron job
+      cron:
+        name: switch the content every 2 min
+        minute: "1-59/2"
+        hour: "*"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        user: root
+        job: "cp /home/ubuntu/second.html /var/www/html/index.html"
+
+    - name: configure nginx site
+      copy:
+        dest: /etc/nginx/sites-available/default
+        content: |
+          server {
+              listen 80;
+              root /var/www/html;
+              server_name defender.opstree.com;
+
+              location / {
+                  index index.html;
+              }
+          }
+
+    - name: reload nginx
+      service:
+        name: nginx
+        state: reloaded
+
+    - name: update /etc/hosts file
+      lineinfile:
+        path: /etc/hosts
+        line: 54.85.212.71 defender.opstree.com   ##public ip of server like (server1) !!!!!
+        insertbefore: BOF
+        state: present
+
+- name: part C of assignment 2
+  hosts: web2
+  become: true
+  tasks:
+    - name: install apache server
+      apt:
+        name: apache2
+        update_cache: yes
+        state: latest
+
+    - name: configure apache to listen on port 8081
+      lineinfile:
+        dest: /etc/apache2/ports.conf
+        regexp: "^Listen 80"
+        line: "Listen 8081"
+
+    - name: configure apache virtual host to listen on port 8081
+      lineinfile:
+        dest: /etc/apache2/sites-available/000-default.conf
+        regexp: "^<VirtualHost \\*:80>"
+        line: "<VirtualHost *:8081>"
+
+    - name: restart apache2
+      service:
+        name: apache2
+        state: restarted
+
+    - name: Configure Nginx as reverse proxy
+      copy:
+        content: |   #public ip of server like (server2) !!!!!
+          server {
+              listen 80;
+              server_name _;
+
+              location / {
+                  proxy_pass http://54.206.247.4:8081;   
+                  proxy_set_header Host $host;
+                  proxy_set_header X-Real-IP $remote_addr;
+                  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                  proxy_set_header X-Forwarded-Proto $scheme;
+              }
+          }
+        dest: /etc/nginx/sites-available/default
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: restart nginx
+      service:
+        name: "{{ item }}"
+        state: restarted
+      loop:
+        - nginx
+        - apache2      
+...

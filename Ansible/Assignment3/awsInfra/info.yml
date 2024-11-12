@@ -1,0 +1,4 @@
+aws_id: #*********** 
+aws_key: #*********
+aws_region: ap-northeast-1   # set the region as per your choice 
+remote_user: ubuntu

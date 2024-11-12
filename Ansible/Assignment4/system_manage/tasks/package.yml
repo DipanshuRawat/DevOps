@@ -1,0 +1,18 @@
+---
+- name: install for ubuntu
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  notify: Restart package
+  loop: "{{ soft_list }}"
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: install for redhat
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  notify: Restart package
+  loop: "{{ soft_list }}"
+  when: ansible_facts['os_family'] == "RedHat" 

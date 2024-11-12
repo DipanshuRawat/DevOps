@@ -1,0 +1,10 @@
+---
+# tasks file for system_manage
+- name: install service manage
+  include_tasks: package.yml
+- name: user manage
+  include_tasks: user.yml
+- name: git manage
+  include_tasks: git.yml
+- name: files manage
+  include_tasks: dir.yml

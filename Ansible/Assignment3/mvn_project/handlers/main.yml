@@ -1,0 +1,7 @@
+---
+# handlers file for mvn_project
+
+- name: Restart Tomcat
+  service:
+      name: tomcat9
+      state: restarted

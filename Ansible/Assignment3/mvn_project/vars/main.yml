@@ -1,0 +1,15 @@
+---
+# vars file for mvn_project
+app_name: Spring3HibernateApp.war
+dir_name: project
+project_path: /home/ubuntu/{{ dir_name }}/spring3hibernate
+app_source_path: "{{ project_path }}/target/{{ app_name }}"
+tomcat_user: tomcat
+tomcat_user_password: pass
+package:
+  - mysql-server
+  - openjdk-11-jdk
+  - maven
+tomcat_pack:
+  - tomcat9-admin
+  - tomcat9

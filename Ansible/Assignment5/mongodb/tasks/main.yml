@@ -1,0 +1,51 @@
+---
+# tasks/main.yml
+
+- name: Install prerequisites (gnupg and curl)
+  apt:
+    name:
+      - gnupg
+      - curl
+    state: present
+    update_cache: yes
+
+- name: Import the MongoDB public GPG key
+  shell: |
+    curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | gpg --dearmor -o /usr/share/keyrings/mongodb-server-8.0.gpg
+  args:
+    creates: /usr/share/keyrings/mongodb-server-8.0.gpg
+
+- name: Create MongoDB apt source list
+  copy:
+    dest: /etc/apt/sources.list.d/mongodb-org-8.0.list
+    content: |
+      deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install MongoDB 8.0 components
+  apt:
+    name:
+      - mongodb-org=8.0.0
+      - mongodb-org-database=8.0.0
+      - mongodb-org-server=8.0.0
+      - mongodb-mongosh
+      - mongodb-org-mongos=8.0.0
+      - mongodb-org-tools=8.0.0
+    state: present
+
+- name: Reload systemd manager configuration
+  command: systemctl daemon-reload
+
+- name: Start MongoDB service
+  systemd:
+    name: mongod
+    state: started
+    enabled: true
+
+- name: Restart MongoDB service
+  systemd:
+    name: mongod
+    state: restarted

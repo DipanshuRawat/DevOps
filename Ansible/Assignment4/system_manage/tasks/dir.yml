@@ -1,0 +1,8 @@
+---
+- name: create  directory
+  file:
+    path: "{{ item.path }}"
+    state: "{{ item.state | default( 'touch' ) }}"
+    owner: "{{ item.owner | default( 'ubuntu' ) }}"
+    group: "{{ item.group | default( 'ubuntu' ) }}"
+  loop: "{{ dir_list }}"

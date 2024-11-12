@@ -1,0 +1,40 @@
+---
+- name: Create AWS Key Pair
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - /home/ubuntu/assignment3/aws_infra/info.yml
+  tasks:
+    - name: Create a new key pair
+      amazon.aws.ec2_key:
+        aws_access_key: "{{ aws_id }}"
+        aws_secret_key: "{{ aws_key }}"
+        name: loffy
+        region: "{{ aws_region }}" 
+        state: present
+      register: key_result
+
+    - name: Set key name as a fact 
+      set_fact:
+        key_name: "{{ key_result.key.name }}"
+    
+    - name: Display the subnet output
+      debug:
+        var: key_result
+
+    - name: Save the private key to a file
+      copy:
+        content: "{{ key_result.key.private_key }}"
+        dest: "./loffy.pem"
+        mode: '0600'
+      when: key_result.changed
+
+      #use for check
+    - name: Use the key name
+      debug:
+        msg: "The key name is {{ key_name }}"
+
+    - name: Save key name to file
+      copy:
+        content: "my_key_name: {{ key_name }}"
+        dest: "./key_name.yml"  

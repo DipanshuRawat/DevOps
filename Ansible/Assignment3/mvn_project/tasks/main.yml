@@ -1,0 +1,6 @@
+---
+# tasks file for mvn_project
+- name:
+  include_tasks: mvn_project.yml
+- name:
+  include_tasks: tomcat.yml

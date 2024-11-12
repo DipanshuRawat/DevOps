@@ -1,0 +1,6 @@
+---
+- name: Install and Configure MongoDB on Ubuntu
+  hosts: mongo # Replace 'ansi' with your target host/group
+  become: yes
+  roles:
+    - mongodb

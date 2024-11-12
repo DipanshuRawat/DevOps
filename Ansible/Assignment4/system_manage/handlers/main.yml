@@ -1,0 +1,7 @@
+---
+# handlers file for system_manage
+- name: Restart package
+  service:
+    name: "{{item}}"
+    state: restarted
+  loop: "{{soft_list}}"

@@ -1,0 +1,41 @@
+---
+- name: create a dir for this task
+  file:
+      path: /home/ubuntu/{{ dir_name }}
+      state: directory
+
+- name: update package
+  apt:
+      update_cache: yes 
+
+- name: install packagies
+  apt:
+      name: "{{ item }}"
+      state: present
+      update_cache: yes    
+  loop: "{{ package }}"
+  
+- name: clone the repo
+  git:
+      repo: https://github.com/opstree/spring3hibernate
+      dest: "{{ project_path }}"
+
+- name: maven dependencies
+  command: mvn dependency:resolve
+  args:
+      chdir: "{{ project_path }}"
+        
+- name: maven compile
+  command: mvn compile
+  args:
+      chdir: "{{ project_path }}"
+
+- name: maven test
+  command: mvn test
+  args:
+      chdir: "{{ project_path }}"
+
+- name: maven package
+  command: mvn package
+  args:
+      chdir: "{{ project_path }}"

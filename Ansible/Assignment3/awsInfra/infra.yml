@@ -1,0 +1,115 @@
+---
+- name: Setup infr on aws
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  vars_files:
+    - /home/ubuntu/assignment3/aws_infra/info.yml
+    - /home/ubuntu/assignment3/aws_infra/key_name.yml
+  tasks:
+    - name: Creating a VPC
+      ec2_vpc_net:
+        aws_access_key: "{{ aws_id }}"
+        aws_secret_key: "{{ aws_key }}"
+        region: "{{ aws_region }}"
+        name: assignment3
+        cidr_block: 10.0.0.0/16
+        tags:
+          TYPE: test
+        tenancy: default
+      register: vpc_ass03
+
+    - name: Display ansibleVPC output
+      debug:
+        var: vpc_ass03
+
+    - name: Creating a subnet
+      ec2_vpc_subnet:
+        aws_access_key: "{{ aws_id }}"
+        aws_secret_key: "{{ aws_key }}"
+        region: "{{ aws_region }}"  
+        state: present 
+        vpc_id: "{{ vpc_ass03.vpc.id }}"
+        cidr: 10.0.0.0/16
+        map_public: yes
+        tags:
+          Name: public_subnet
+          TYPE: test
+      register: pub_sub01
+    - name: Display the subnet output
+      debug:
+        var: pub_sub01
+
+    - name: Creating an Internet Gateway
+      ec2_vpc_igw:
+        aws_access_key: "{{ aws_id }}"
+        aws_secret_key: "{{ aws_key }}"
+        region: "{{ aws_region }}"
+        state: present
+        vpc_id: "{{ vpc_ass03.vpc.id }}"
+        tags:
+          Name: my_igw
+      register: igw01
+    - name: Displaying the ansibleVPC_IG output
+      debug:
+        var: igw01
+
+    - name: Creating a route table
+      ec2_vpc_route_table:
+        aws_access_key: "{{ aws_id }}"
+        aws_secret_key: "{{ aws_key }}"
+        region: "{{ aws_region }}"
+        state: present
+        vpc_id: "{{ vpc_ass03.vpc.id }}"
+        tags:
+          Name: route_table
+        subnets:
+          - "{{ pub_sub01.subnet.id }}"
+        routes:
+          - dest: 0.0.0.0/0
+            gateway_id: "{{ igw01.gateway_id }}"
+      register: route_01
+    - name: Displaying the rt_ansibleVPC_PublicSubnet output
+      debug:
+        var: route_01
+
+    - name: create a security group for EC2
+      ec2_group:
+        aws_access_key:  "{{ aws_id }}"
+        aws_secret_key: "{{ aws_key }}"
+        region: "{{ aws_region }}"
+        name: "security_group_01"
+        description: "Ansible Security Group"
+        vpc_id: "{{ vpc_ass03.vpc.id }}"
+        tags:
+          Name: sg_01
+          TYPE: test
+        rules:
+          - proto: "all" 
+            cidr_ip: "0.0.0.0/0"
+          - proto: "tcp"
+            ports: "22"
+            cidr_ip: "0.0.0.0/0"
+      register: my_sg_01
+    - name: Display the SG infor
+      debug:
+        var: my_sg_01
+
+    - name: Launch EC2 instance
+      amazon.aws.ec2_instance:
+        aws_access_key: "{{ aws_id }}"
+        aws_secret_key: "{{ aws_key }}"
+        key_name: "{{ my_key_name }}"         
+        instance_type: t2.micro                 
+        image_id: ami-0ac6b9b2908f3e20d 
+        region: "{{ aws_region }}"                      
+        wait: yes
+        vpc_subnet_id: "{{ pub_sub01.subnet.id }}"   
+        security_groups: "{{ my_sg_01.group_id }}"
+        tags:
+          Name: "infra_ec2"
+      register: ec2
+
+    - name: Display the instance information
+      debug:
+        var: ec2

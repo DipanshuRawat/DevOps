@@ -1,0 +1,8 @@
+---
+- name: Add & update git repo
+  git:
+   repo: "{{ item.repo_url }}"
+   dest: "{{ item.dest }}"
+   update: yes
+  loop: "{{ git_repos }}"
+  when: git_repos is defined

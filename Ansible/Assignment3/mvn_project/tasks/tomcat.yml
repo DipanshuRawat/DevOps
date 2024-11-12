@@ -1,0 +1,38 @@
+- name: update & install tomcat
+  apt:
+      update_cache: true
+      name: "{{ item }}"
+      state: present
+  with_items: "{{ tomcat_pack }}"
+
+- name: add 'admin-gui' role to tomcat-users.xml
+  lineinfile:
+      path: /etc/tomcat9/tomcat-users.xml
+      line: '<role rolename="admin-gui"/>'
+      insertbefore: '</tomcat-users>'
+      state: present
+
+
+- name: add 'manager-gui' role to tomcat-users.xml
+  lineinfile:
+      path: /etc/tomcat9/tomcat-users.xml
+      line: '<role rolename="manager-gui"/>'
+      insertbefore: '</tomcat-users>'
+      state: present
+
+- name: add 'tomcat' user with roles to tomcat-users.xml
+  lineinfile:
+      path: /etc/tomcat9/tomcat-users.xml
+      line: '<user username="{{ tomcat_user }}" password="{{ tomcat_user_password }}" roles="admin-gui,manager-gui"/>'
+      insertbefore: '</tomcat-users>'
+      state: present
+
+- name: copy .war files to /var/lib/tomcat9/webapps/
+  copy:
+      src: "{{ app_source_path }}"
+      dest: "/var/lib/tomcat9/webapps/{{ app_name }}"
+      remote_src: yes
+  notify:
+      - Restart Tomcat
+
+  
