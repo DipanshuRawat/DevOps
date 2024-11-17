@@ -1,3 +1,5 @@
-def call(){
- echo "Hello"
+// vars/git.groovy
+def call() {
+    echo "Hello"
 }
+
