@@ -1,0 +1,1 @@
+echo "$ninja from DevopsNinja" >> ninja.txt
