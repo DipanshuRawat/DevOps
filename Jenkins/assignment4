@@ -1,0 +1,90 @@
+pipeline {
+    agent any
+
+    parameters {
+        booleanParam(name: 'stabilityScan', defaultValue: false, description: 'Skip Code Stability Scan?')
+        booleanParam(name: 'qualityScan', defaultValue: false, description: 'Skip Code Quality Scan?')
+        booleanParam(name: 'coverageScan', defaultValue: false, description: 'Skip Code Coverage Scan?')
+        
+    }
+
+    stages {
+        stage('Code Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/builderHub/CICD-01.git'
+            }
+        }
+
+        stage('Initial Approval') {
+            steps {
+                input message: 'Do you want to proceed with the build?', ok: 'Yes'
+            }
+        }
+
+        stage('Run Scans in Parallel') {
+            parallel {
+                stage('Code Stability') {
+                    when {
+                        expression { params.stabilityScan == true }
+                    }
+                    steps {
+                        echo 'Running code stability analysis...'
+                        sh 'mvn verify'
+                        echo 'Code stability analysis completed.'
+                    }
+                }
+
+                stage('Code Quality Analysis') {
+                    when {
+                        expression { params.qualityScan == true }
+                    }
+                    steps {
+                        echo 'Running code quality analysis...'
+                        sh 'mvn checkstyle:checkstyle'
+                        echo 'Code quality analysis completed.'
+                    }
+                }
+
+                stage('Code Coverage Analysis') {
+                    when {
+                        expression { params.coverageScan == true }
+                    }
+                    steps {
+                        echo 'Running code coverage analysis...'
+                        sh 'mvn jacoco:report'
+                        echo 'Code coverage analysis completed.'
+                    }
+                }
+            }
+        }
+
+        stage('Generate Report for Code Quality and Coverage') {
+            steps {
+                echo 'Generating code quality & coverage report...'
+                recordIssues sourceCodeRetention: 'LAST_BUILD', tools: [checkStyle()]
+                jacoco()
+                echo 'Report generated successfully.'
+            }
+        }
+
+        stage('Approval for Publishing Artifacts') {
+            steps {
+                input message: 'Do you want to approve the publication of artifacts?', ok: 'Approve'
+            }
+        }
+
+        stage('Publish Artifacts') {
+            steps {
+                echo 'Publishing artifacts...'
+                archiveArtifacts artifacts: 'target/*.jar'
+                echo 'Artifacts published successfully.'
+            }
+        }
+    }
+
+     post {
+        always {
+            slackSend channel: 'visca-barca', message: 'Successfully done everything'
+        }
+    }
+}
