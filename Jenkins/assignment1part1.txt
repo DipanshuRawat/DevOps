@@ -1,0 +1,8 @@
+git branch $branch_name
+git branch
+git checkout $base_branch
+git merge $branch_name
+git checkout $branch_name
+git rebase $base_branch
+git checkout $base_branch
+git branch -d $branch_name
