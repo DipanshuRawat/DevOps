@@ -1,0 +1,36 @@
+Day 2:-
+
+git clone https://github.com/aayushverma19/image.git
+ls
+cd image/
+aws s3 ls
+aws s3 cp frontpage.jpeg bucket-assignment3-aws
+aws s3 cp frontpage.jpeg s3://bucket-assignment3-aws
+sudo vi /var/www/html/index.html 
+aws s3api put-object-acl --bucket bucket-assignment3-aws --key frontpage.jpeg --acl public-read
+
+
+Day 2:-
+
+git clone https://github.com/aayushverma19/image.git
+cd image/
+ls
+aws s3 cp SQLpt1new.jpg s3://bucket-assignment3-aws 
+cd
+aws s3api head-object --bucket bucket-assignment3-aws  --key SQLpt1new.jpg
+aws s3api put-object-acl --bucket bucket-assignment3-aws --key SQLpt1new.jpg --acl public-read
+aws s3api head-object --bucket bucket-assignment3-aws  --key SQLpt1new.jpg | grep Object_URL
+aws s3 ls s3://your-bucket-name --recursive 
+aws s3 ls s3://bucket-assignment3-aws --recursive 
+sudo vi /var/www/html/index.html 
+rm -rf image/
+git clone https://github.com/aayushverma19/image.git
+ls
+cd image/
+aws configure
+ls
+aws s3 ls
+aws s3 cp frontpage.jpeg bucket-assignment3-aws
+aws s3 cp frontpage.jpeg s3://bucket-assignment3-aws
+sudo vi /var/www/html/index.html 
+aws s3api put-object-acl --bucket bucket-assignment3-aws --key frontpage.jpeg --acl public-read
